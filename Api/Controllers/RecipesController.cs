@@ -42,7 +42,7 @@ namespace Api.Controllers
         public async Task<ActionResult<Recipe>> AddRecipe([FromBody] CreateRecipeModel model)
         {
             var result = await _recipeRepository.AddRecipe(model.ToEntity());
-            return Created(result.Id, result);
+            return Ok(result);
         }
 
         [HttpPut("{id}")]
@@ -53,7 +53,7 @@ namespace Api.Controllers
         }
         
         [HttpDelete("{id}")]
-        public async Task<ActionResult> UpdateRecipe(string id)
+        public async Task<ActionResult> DeleteRecipe(string id)
         {
             await _recipeRepository.DeleteRecipe(id);
             return Ok("Deleted");

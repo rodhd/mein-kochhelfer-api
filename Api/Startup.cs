@@ -30,6 +30,7 @@ namespace Api
             services.AddControllers();
             services.AddFaunaDb();
             services.AddSwaggerDocument();
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +48,18 @@ namespace Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseCors(
+                options => options
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .WithExposedHeaders(
+                        "Location",
+                        "Content-Type",
+                        "Content-Encoding",
+                        "Content-Length")
+            );
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
