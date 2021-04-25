@@ -28,7 +28,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddFaunaDb();
+            services.AddFaunaDb(Configuration);
             services.AddSwaggerDocument();
             services.AddCors();
         }
